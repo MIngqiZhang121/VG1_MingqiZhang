@@ -20,6 +20,7 @@ public class Ship : MonoBehaviour
     public float health = 100f;
 
 
+    //function
 
 
     // Start is called before the first frame update
