@@ -19,7 +19,7 @@ public class Ship : MonoBehaviour
     public float healthMax = 100f;
     public float health = 100f;
 
-
+    public float projectileSpeed = 5f;
     //function
 
 
@@ -41,7 +41,10 @@ public class Ship : MonoBehaviour
     }
     void FireProjectile()
     {
-        Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        //Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        GameObject bullet = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        bullet.GetComponent<Projectile>().speed = projectileSpeed;
+
     }
 
     IEnumerator FiringTimer()
@@ -121,9 +124,11 @@ public class Ship : MonoBehaviour
             GameController.instance.money -= cost;
 
             firingDelay -= 0.05f;
+            projectileSpeed += 1f;
 
             int newCost = 100 + Mathf.RoundToInt((1f - firingDelay) * 100f);
             fireSpeedUpgradeText.text = "Fire Speed $" + newCost;
+
         }
     }
 }

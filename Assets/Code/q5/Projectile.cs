@@ -10,6 +10,8 @@ public class Projectile : MonoBehaviour
     // State Tracking
     Transform target;
 
+    public float speed = 5f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +19,7 @@ public class Projectile : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    /*void Update()
     {
         float acceleration = 1f;
         float maxSpeed = 2f;
@@ -32,11 +34,25 @@ public class Projectile : MonoBehaviour
             _rb.MoveRotation(angle);
         }
 
-        _rb.AddForce(transform.right * acceleration);
+        //_rb.AddForce(transform.right * acceleration);
 
-        _rb.velocity = Vector2.ClampMagnitude(_rb.velocity, maxSpeed);
+        //_rb.velocity = Vector2.ClampMagnitude(_rb.velocity, maxSpeed);
     
-}
+}*/
+    void Update()
+    {
+        ChooseNearestTarget();
+
+        if (target != null)
+        {
+            Vector2 directionToTarget = target.position - transform.position;
+            float angle = Mathf.Atan2(directionToTarget.y, directionToTarget.x) * Mathf.Rad2Deg;
+
+            transform.rotation = Quaternion.Euler(0, 0, angle);
+        }
+
+        transform.Translate(Vector3.right * speed * Time.deltaTime);
+    }
     void ChooseNearestTarget()
     {
         float closestDistance = 9999f;
