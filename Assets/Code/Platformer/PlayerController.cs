@@ -39,9 +39,10 @@ namespace Platformer
         }*/
         void FixedUpdate()
         {
-            float speed = Mathf.Abs(_rigidbody2D.velocity.x);
-            
-            if (speed < 0.05f)
+            float speed = Mathf.Abs(_rigidbody2D.velocity.x) / 5f;
+            speed = Mathf.Clamp01(speed);
+
+            if (speed < 0.1f)
             {
                 speed = 0f;
             }
@@ -51,7 +52,7 @@ namespace Platformer
           
             if (speed > 0.05f)
             {
-                animator.speed = speed / 3f;
+                animator.speed = speed / 1f;
             }
             else
             {
